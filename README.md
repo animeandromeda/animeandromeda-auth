@@ -7,7 +7,7 @@ AnimeAndromeda Auth/User REST API
 *The code is from September 2020 it needs a little review but it's pretty resilient.*
 
 ## endpoints
-fixed prefix: /api
+**fixed prefix: /api**
 
 ##### `/`  
 Index, returns nothing
