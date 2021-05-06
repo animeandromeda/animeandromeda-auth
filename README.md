@@ -71,7 +71,7 @@ the API is exposed on the port 5005
 
 ## enviroment variable
 In order to fully function the API needs 3 **Enviroment Variables**.
-Create a **.env** file with this 3 ones:
+Create a **.env** file with this 3 ones:  
 `DB_AUTH = the mongodb encoded url for the database`  
 `WEB_TOKEN_SECRET = a pseudo random string for crypto uses`  
 `PHOTO_DEFAULT = a base64 encoded png photo for the profile, as the default one` 
