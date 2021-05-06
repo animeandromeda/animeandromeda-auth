@@ -59,6 +59,39 @@ If authenticated, gives the user the ability to change it's username.
 The _id will not be modified.
 post param: username (the new username)
 
+## user schema
+Here's how the user schema should look like:
+```json
+{
+    "_id": {
+        "$oid": "5fff3456e077760abcc6e1899"
+    },
+    "img": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQA",
+    "loved": [
+        {
+            "series": "Bakemonogatari",
+            "title": "Bakemonogatari",
+            "pic": "https://cdn.myanimelist.net/images/anime/11/75274l.jpg",
+            "premiere": "Summer 2009"
+        },
+        {
+            "series": "Kobayashi-sanChiNoMaidDragon",
+            "title": "Kobayashi-san Chi No Maid Dragon ",
+            "pic": "https://cdn.myanimelist.net/images/anime/5/85434l.jpg",
+            "premiere": "Winter 2017"
+        }
+    ],
+    "timestamps": [
+        ""
+    ],
+    "username": "yun",
+    "email": "test@test.test",
+    "password": "**********bcrypt-hash***********",
+    "__v": 0,
+    "background": "data:image/jpeg;base64,/9j/4AAQSkZJRgABA"
+}
+```
+
 ## classic setup
 - tested on Linux and Microsoft Windows
 - clone this repository
