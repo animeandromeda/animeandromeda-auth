@@ -59,6 +59,8 @@ If authenticated, gives the user the ability to change it's username.
 The _id will not be modified.
 post param: username (the new username)
 
+#### changeusername and timestamps are still TODOs
+
 ## user schema
 Here's how the user schema should look like:
 ```json
