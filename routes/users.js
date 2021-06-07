@@ -6,8 +6,23 @@ const checkToken = require('../middlewares/verifyWebToken');
 const multer = require('multer');
 const upload = multer({})
 const router = express.Router();
+const rateLimit = require("express-rate-limit");
 
-router.post('/', (req, res, next) => {
+const createAccountLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    max: 10,
+    message:
+        "Troppe richieste da parte di questo indirizzo ip, cosa stai tentando di fare??? Riprova tra un'ora"
+});
+
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 20,
+    message:
+        "Troppe richieste da parte di questo indirizzo ip, cosa stai tentando di fare??? Riprova tra un quarto d'ora"
+});
+
+router.post('/', createAccountLimiter, (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     const saltRounds = 12;
     const plainPassword = req.body.password;
@@ -103,8 +118,9 @@ router.post('/login', async (req, res) => {
     }
 
     const web_token = jwt.sign({ _id: user._id }, process.env.WEB_TOKEN_SECRET, { expiresIn: "60d" });
-    res.header('x-auth-token', web_token).json(web_token);
-    //res.cookie('auth-token', web_token, { httpOnly: true });
+    res.cookie('auth-token', web_token, { httpOnly: true });
+    res.header('x-auth-token', web_token)
+    res.json(web_token);
 });
 
 router.post('/loved', checkToken, async (req, res) => {
@@ -126,7 +142,7 @@ router.post('/loved', checkToken, async (req, res) => {
 router.delete('/loved', checkToken, async (req, res) => {
     const data = req.body.loved;
     User.
-        update(
+        updateOne(
             { _id: req.user._id },
             { $pull: { loved: data } })
         .then(res.status(200).json("removed"))
@@ -152,7 +168,7 @@ router.post('/timestamps', checkToken, async (req, res) => {
 router.delete('/timestamps', checkToken, async (req, res) => {
     const data = req.body.timestamp;
     User.
-        update(
+        updateOne(
             { _id: req.user._id },
             { $pull: { $in: { timestamps: data } } })
         .then(res.status(200).json("added"))

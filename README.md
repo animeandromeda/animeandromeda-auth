@@ -2,6 +2,9 @@
 
 ![logo](https://www.animeandromeda.net/static/media/Illustration.23741024.webp)
 
+# Suu - AnimeAndromeda Auth API
+<img src="https://i.ibb.co/5nv0qkr/suuuuuu.png" width="400">
+
 AnimeAndromeda Auth/User REST API
 
 *The code is from September 2020 it needs a little review but it's pretty resilient.*
